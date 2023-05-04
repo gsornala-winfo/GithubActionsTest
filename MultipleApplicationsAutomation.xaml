@@ -1,0 +1,408 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Sequence" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="input_filepath" Type="InArgument(x:String)" />
+    <x:Property Name="Db_Connection" Type="InArgument(ui:DatabaseConnection)" />
+    <x:Property Name="Transaction_Item" Type="InArgument(ui:QueueItem)" />
+    <x:Property Name="Requester" Type="InArgument(x:String)" />
+    <x:Property Name="To_Address" Type="InArgument(x:String)" />
+    <x:Property Name="Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="filename" Type="InArgument(x:String)" />
+    <x:Property Name="SheetName" Type="InOutArgument(x:String)" />
+    <x:Property Name="value_config" Type="InOutArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="application_name" Type="InArgument(x:String)" />
+    <x:Property Name="process_id" Type="InArgument(x:String)" />
+    <x:Property Name="Config_DT" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="error_message_key" Type="InOutArgument(x:String)" />
+    <x:Property Name="overall_status_key" Type="InOutArgument(x:String)" />
+    <x:Property Name="Status_Key" Type="InOutArgument(x:String)" />
+  </x:Members>
+  <this:Sequence.application_name>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Sequence.application_name>
+  <this:Sequence.process_id>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Sequence.process_id>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1251,3292</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>Sequence_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="40">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.Mail</x:String>
+      <x:String>UiPath.Mail.SMTP.Activities</x:String>
+      <x:String>UiPath.Mail.Activities</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.Mail</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.Python</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <sap:WorkflowViewStateService.ViewState>
+    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+      <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+    </scg:Dictionary>
+  </sap:WorkflowViewStateService.ViewState>
+  <Sequence sap2010:Annotation.AnnotationText="Here we can swich the application based on appocartion name and performe process and uploded files filanly seand success message to the user" sap:VirtualizedContainerService.HintSize="1261,3227" sap2010:WorkflowViewState.IdRef="Sequence_27">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="email_from" />
+      <Variable x:TypeArguments="x:String" Name="fullpath" />
+      <Variable x:TypeArguments="x:String" Name="url" />
+      <Variable x:TypeArguments="x:String" Name="document_repo_url" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <TryCatch DisplayName="Try Catch" sap:VirtualizedContainerService.HintSize="1199,3074" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Variables>
+        <Variable x:TypeArguments="x:String" Name="sheet_name" />
+      </TryCatch.Variables>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <TryCatch.Try>
+        <Sequence sap:VirtualizedContainerService.HintSize="621,2650" sap2010:WorkflowViewState.IdRef="Sequence_32">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="folder_name" />
+            <Variable x:TypeArguments="x:String" Name="configuration_filepath" />
+            <Variable x:TypeArguments="x:String" Name="required_date_format" />
+            <Variable x:TypeArguments="x:String" Name="count_rows_dt" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Assign sap:VirtualizedContainerService.HintSize="559,70" sap2010:WorkflowViewState.IdRef="Assign_81">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[fullpath]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[Transaction_Item.SpecificContent("Filepath").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap:VirtualizedContainerService.HintSize="559,70" sap2010:WorkflowViewState.IdRef="Assign_75">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[sheet_name]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[Transaction_Item.SpecificContent("Sheet_Name").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap:VirtualizedContainerService.HintSize="559,70" sap2010:WorkflowViewState.IdRef="Assign_76">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[filename]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[Transaction_Item.SpecificContent("Filename").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap:VirtualizedContainerService.HintSize="559,70" sap2010:WorkflowViewState.IdRef="Assign_83">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[application_name]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[Transaction_Item.SpecificContent("Application_Name").ToString]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <Assign sap:VirtualizedContainerService.HintSize="559,70" sap2010:WorkflowViewState.IdRef="Assign_82">
+            <Assign.To>
+              <OutArgument x:TypeArguments="x:String">[input_filepath]</OutArgument>
+            </Assign.To>
+            <Assign.Value>
+              <InArgument x:TypeArguments="x:String">[fullpath]</InArgument>
+            </Assign.Value>
+          </Assign>
+          <If Condition="[application_name = &quot;Oracle Cloud&quot;]" sap:VirtualizedContainerService.HintSize="559,267" sap2010:WorkflowViewState.IdRef="If_3">
+            <If.Then>
+              <Assign sap:VirtualizedContainerService.HintSize="262,70" sap2010:WorkflowViewState.IdRef="Assign_84">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[application_name]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">Oracle Fusion</InArgument>
+                </Assign.Value>
+              </Assign>
+            </If.Then>
+          </If>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" sap2010:Annotation.AnnotationText="Converts current system time format into required format" DisplayName="Invoke Required_Date_Format workflow" sap:VirtualizedContainerService.HintSize="559,164" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_24" UnSafe="False" WorkflowFileName="Required_Date_Format.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <OutArgument x:TypeArguments="x:String" x:Key="req_date_format">[required_date_format]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+          </ui:InvokeWorkflowFile>
+          <Sequence sap:VirtualizedContainerService.HintSize="559,1467" sap2010:WorkflowViewState.IdRef="Sequence_48">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[application_name]" sap:VirtualizedContainerService.HintSize="497,1235" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Sequence x:Key="Oracle Fusion" sap:VirtualizedContainerService.HintSize="400,244" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                <Sequence.Variables>
+                  <Variable x:TypeArguments="x:String" Name="output_folder" />
+                </Sequence.Variables>
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke config workflow" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_16" UnSafe="False" WorkflowFileName="OracleFusionApplicationAutomation.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">[Config]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Excel_Range" />
+                    <InArgument x:TypeArguments="x:String" x:Key="Sheet_Name">[sheet_name]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Configuration_Input_File_Path">[configuration_filepath]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Data_Input_Filepath">[input_filepath]</InArgument>
+                    <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="DB_Connection">[Db_Connection]</InArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="Document_Repo_Url">[document_repo_url]</InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="Output_Folder">[output_folder]</InOutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Received_Date_Time">[Transaction_Item.SpecificContent("Received_Date").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Processed_Date_Time">[required_date_format]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Email_Address">[Transaction_Item.SpecificContent("Email_From").ToString]</InArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="Process_ID">[process_id]</InOutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Filename">[filename]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Requester">[Requester]</InArgument>
+                    <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionItem">[Transaction_Item]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="Oracle EBS" DisplayName="Invoke config workflow" sap:VirtualizedContainerService.HintSize="334,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_25" UnSafe="False" WorkflowFileName="OracleEBSApplicationAutomation.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">[Config]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Excel_Range" />
+                  <InArgument x:TypeArguments="x:String" x:Key="Sheet_Name">[sheet_name]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Configuration_Input_File_Path">[configuration_filepath]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Data_Input_Filepath">[input_filepath]</InArgument>
+                  <InOutArgument x:TypeArguments="ui:DatabaseConnection" x:Key="DB_Connection">[Db_Connection]</InOutArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="Document_Repo_Url">[document_repo_url]</InOutArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="Output_Folder" />
+                  <InArgument x:TypeArguments="x:String" x:Key="Received_Date_Time">[Transaction_Item.SpecificContent("Received_Date").ToString]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Processed_Date_Time">[required_date_format]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Email_Address">[Transaction_Item.SpecificContent("Email_From").ToString]</InArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="Process_ID">[process_id]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Filename">[filename]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Requester">[Requester]</InArgument>
+                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionItem">[Transaction_Item]</InArgument>
+                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="value_config">[value_config]</InOutArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="Status_Key">[Status_Key]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="overall_status_key">[overall_status_key]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="error_message_key">[error_message_key]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+              <Sequence x:Key="SAP" sap:VirtualizedContainerService.HintSize="400,244" sap2010:WorkflowViewState.IdRef="Sequence_49">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke SAPApplicationAutomation workflow" sap:VirtualizedContainerService.HintSize="338,122" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_27" UnSafe="False" WorkflowFileName="SAPApplicationAutomation.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">
+                      <mva:VisualBasicValue x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="Config" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Excel_Range" />
+                    <InArgument x:TypeArguments="x:String" x:Key="Sheet_Name">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="sheet_name" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Configuration_Input_File_Path">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="configuration_filepath" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Data_Input_Filepath">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="input_filepath" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="DB_Connection">
+                      <mva:VisualBasicValue x:TypeArguments="ui:DatabaseConnection" ExpressionText="Db_Connection" />
+                    </InArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="Document_Repo_Url">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="document_repo_url" />
+                    </InOutArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="Output_Folder" />
+                    <InArgument x:TypeArguments="x:String" x:Key="Received_Date_Time">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="Transaction_Item.SpecificContent(&quot;Received_Date&quot;).ToString" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Processed_Date_Time">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="required_date_format" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Email_Address">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="Transaction_Item.SpecificContent(&quot;Email_From&quot;).ToString" />
+                    </InArgument>
+                    <InOutArgument x:TypeArguments="x:String" x:Key="Process_ID">
+                      <mva:VisualBasicReference x:TypeArguments="x:String" ExpressionText="process_id" />
+                    </InOutArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Filename">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="filename" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Requester">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="Requester" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionItem">
+                      <mva:VisualBasicValue x:TypeArguments="ui:QueueItem" ExpressionText="Transaction_Item" />
+                    </InArgument>
+                    <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="value_config">
+                      <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:Object)" ExpressionText="value_config" />
+                    </InOutArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="Config_DT">
+                      <mva:VisualBasicValue x:TypeArguments="sd:DataTable" ExpressionText="Config_DT" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="error_message_key">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="error_message_key" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="overall_status_key">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="overall_status_key" />
+                    </InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="Status_Key">
+                      <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="Status_Key" />
+                    </InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" x:Key="Oracle ADFDI" DisplayName="Invoke config workflow" sap:VirtualizedContainerService.HintSize="334,123" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_26" UnSafe="False" WorkflowFileName="OracleExcelApplicationAutomation.xaml">
+                <ui:InvokeWorkflowFile.Arguments>
+                  <InArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="Config">[Config]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Excel_Range" />
+                  <InArgument x:TypeArguments="x:String" x:Key="Sheet_Name">[sheet_name]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Configuration_Input_File_Path">[configuration_filepath]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Data_Input_Filepath">[input_filepath]</InArgument>
+                  <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="DB_Connection">[Db_Connection]</InArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="Document_Repo_Url">[document_repo_url]</InOutArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="Output_Folder" />
+                  <InArgument x:TypeArguments="x:String" x:Key="Received_Date_Time">[Transaction_Item.SpecificContent("Received_Date").ToString]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Processed_Date_Time">[required_date_format]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Email_Address">[Transaction_Item.SpecificContent("Email_From").ToString]</InArgument>
+                  <InOutArgument x:TypeArguments="x:String" x:Key="Process_ID">[process_id]</InOutArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Filename">[filename]</InArgument>
+                  <InArgument x:TypeArguments="x:String" x:Key="Requester">[Requester]</InArgument>
+                  <InArgument x:TypeArguments="ui:QueueItem" x:Key="TransactionItem">[Transaction_Item]</InArgument>
+                </ui:InvokeWorkflowFile.Arguments>
+              </ui:InvokeWorkflowFile>
+            </Switch>
+            <Assign sap:VirtualizedContainerService.HintSize="497,70" sap2010:WorkflowViewState.IdRef="Assign_63">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[email_from]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Transaction_Item.SpecificContent("Email_From").ToString]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="1165,104" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+  </Sequence>
+</Activity>
